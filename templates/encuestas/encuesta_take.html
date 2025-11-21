@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>{{ encuesta.titulo }}</h2>
+  <p>{{ encuesta.descripcion }}</p>
+  <form method="post">{% csrf_token %}
+    <h5>Datos del participante</h5>
+    {{ participante_form.as_p }}
+    <hr>
+    {% for p in preguntas %}
+      <div class="mb-3">
+        <label class="form-label"><strong>{{ forloop.counter }}. {{ p.texto }}</strong></label>
+        {% if p.tipo == 'texto' %}
+          <textarea name="preg_{{ p.id }}" class="form-control"></textarea>
+        {% elif p.tipo == 'una' %}
+          {% for op in p.opciones_list %}
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="preg_{{ p.id }}" id="p{{ p.id }}_{{ forloop.counter }}" value="{{ op }}">
+              <label class="form-check-label" for="p{{ p.id }}_{{ forloop.counter }}">{{ op }}</label>
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for op in p.opciones_list %}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="preg_{{ p.id }}" id="p{{ p.id }}_{{ forloop.counter }}" value="{{ op }}">
+              <label class="form-check-label" for="p{{ p.id }}_{{ forloop.counter }}">{{ op }}</label>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button class="btn btn-primary" type="submit">Enviar respuestas</button>
+  </form>
+{% endblock %}

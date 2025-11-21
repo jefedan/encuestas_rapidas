@@ -1,0 +1,1 @@
+Carpeta estática: añade CSS/JS/imagenes aquí para tu proyecto.
