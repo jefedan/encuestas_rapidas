@@ -1,3 +1,4 @@
-Django>=4.2
-gunicorn
-django-crispy-forms
+- Python 3.10+
+- Django 4+
+- Librerías adicionales: django-bootstrap5.
+
