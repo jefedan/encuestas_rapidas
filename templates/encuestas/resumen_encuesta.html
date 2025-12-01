@@ -1,0 +1,35 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Resumen encuesta{% endblock %}
+
+{% block content %}
+<div class="table-wrapper">
+    <h2 class="page-title">Resumen - {{ encuesta.nombre }}</h2>
+    <p>{{ encuesta.descripcion }}</p>
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Pregunta</th>
+                <th>Regular</th>
+                <th>Bueno</th>
+                <th>Excelente</th>
+                <th>No Responde</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in resumen %}
+            <tr>
+                <td>{{ item.pregunta.texto }}</td>
+                <td>{{ item.regular }}</td>
+                <td>{{ item.bueno }}</td>
+                <td>{{ item.excelente }}</td>
+                <td>{{ item.no_responde }}</td>
+                <td>{{ item.total }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
