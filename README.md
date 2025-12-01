@@ -1,19 +1,18 @@
-# Encuestas Rápidas (Django) - Versión Completa (Admin mejorado)
-Proyecto demo listo para abrir en GitHub Codespaces.
+Installation:
+Installer Python mas pip incluido:  https://www.python.org/downloads/
+•	Crear elentornovirtual : python-m venvvenv
+•	Activarelentornovirtual :venv\Scripts\activate
+•	python-m pipinstall--upgradepip
+•	Instalar Django usandopip:InstalarDjango :pip install Django; 
+•	Para conectarnos a una BD enMySql Server para Djangoinstalamos :pip install mysql install;
+•	Creacion del Proyecto :django-admin startprojectappEncuesta
+•	cd appEncuesta
+•	Crear el Proyecto Encuesta :python manage.py startappEncuesta
+•	Crear la apliaconappEncuesta :python manage.py startappappEncuestas
+•	Crea archivos de migraciones para cambios de modelos :python manage.py makemigrations
+•	Apliac esas migraciones a la base de datos :python manage.py migrate
+•	Crea un superusuario con nombre,email y contraseña :python manage.py createsuperuser
+•	Ejecutar servidor: python manage.py runserver
 
-Contenido principal:
-- App `encuestas` con modelos: Encuesta, Pregunta, Respuesta, Participante
-- Vistas para crear encuestas (frontend simple), tomar encuestas y ver resultados
-- Admin mejorado con inlines, búsqueda y filtros
-- Comando para crear datos de ejemplo
-- .devcontainer para Codespaces
 
-Instrucciones rápidas (local o Codespaces):
-  pip install -r requirements.txt
-  python manage.py makemigrations
-  python manage.py migrate
-  python manage.py createsuperuser
-  python manage.py create_sample_data
-  python manage.py runserver 0.0.0.0:8000
 
-Nota: db.sqlite3 no se incluye por seguridad; se genera con migrate.
