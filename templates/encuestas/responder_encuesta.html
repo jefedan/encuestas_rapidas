@@ -1,0 +1,40 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Responder encuesta{% endblock %}
+
+{% block content %}
+<div class="table-wrapper">
+    <h2 class="page-title">{{ encuesta.nombre }}</h2>
+    <p>{{ encuesta.descripcion }}</p>
+    <br>
+
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Pregunta</th>
+                    <th>Regular</th>
+                    <th>Bueno</th>
+                    <th>Excelente</th>
+                    <th>No Responde</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in preguntas %}
+                <tr>
+                    <td>{{ p.texto }}</td>
+                    {% for op in opciones %}
+                        <td>
+                            <input type="radio" name="preg_{{ p.id_pregunta }}" value="{{ op }}" required>
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <button type="submit" class="btn btn-primary">Enviar respuestas</button>
+        <a href="{% url 'usuario_panel' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
