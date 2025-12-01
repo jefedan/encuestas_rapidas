@@ -1,0 +1,15 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Confirmar eliminación{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>¿Seguro que desea eliminar este registro?</h2>
+    <p>{{ obj }}</p>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Sí, eliminar</button>
+        <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
