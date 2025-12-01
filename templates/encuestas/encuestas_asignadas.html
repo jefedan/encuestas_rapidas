@@ -1,0 +1,25 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Encuestas asignadas{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>Encuestas asignadas</h2>
+    <p>Participante: <strong>{{ participante.nombre }}</strong> ({{ participante.username }})</p>
+    <br>
+
+    {% if encuestas %}
+        <p>Seleccione una encuesta para responder:</p>
+        <ul>
+        {% for e in encuestas %}
+            <li>
+                {{ e.nombre }} - {{ e.descripcion }}
+                |
+                <a href="{% url 'responder_encuesta' e.id_encuesta %}">Responder</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tiene encuestas asignadas.</p>
+    {% endif %}
+</div>
+{% endblock %}
