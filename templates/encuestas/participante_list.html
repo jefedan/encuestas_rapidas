@@ -1,0 +1,47 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Participantes{% endblock %}
+
+{% block content %}
+<div class="table-wrapper">
+    <h2 class="page-title">Listado de participantes</h2>
+
+    <div class="page-actions">
+        <a href="{% url 'admin_panel' %}" class="btn btn-secondary">Volver al panel</a>
+        <a href="{% url 'participante_create' %}" class="btn btn-primary">Nuevo participante</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Usuario</th>
+                <th>Encuesta asignada</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in participantes %}
+            <tr>
+                <td>{{ p.id_participante }}</td>
+                <td>{{ p.nombre }}</td>
+                <td>{{ p.correo }}</td>
+                <td>{{ p.username }}</td>
+                <td>
+                    {% if p.id_encuesta_asignada %}
+                        {{ p.id_encuesta_asignada.nombre }}
+                    {% else %}
+                        (ninguna)
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'participante_update' p.id_participante %}">Editar</a> |
+                    <a href="{% url 'participante_delete' p.id_participante %}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
