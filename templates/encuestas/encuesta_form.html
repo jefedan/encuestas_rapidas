@@ -1,0 +1,14 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Encuesta{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>Registro de encuesta</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'encuesta_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
