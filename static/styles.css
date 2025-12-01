@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #e5edf5;
+    color: #10213a;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header {
+    background: #123a86;
+    color: #f9fafb;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+header nav a {
+    margin-left: 1rem;
+    font-size: 0.95rem;
+}
+
+main {
+    flex: 1;
+    padding: 2rem 3rem;
+}
+
+.app-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Botones */
+
+button,
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.9rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.btn-primary {
+    background: #1d4ed8;
+    color: #f9fafb;
+}
+
+.btn-primary:hover {
+    background: #173ea8;
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #10213a;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e1;
+}
+
+.btn-link {
+    background: transparent;
+    padding: 0.2rem 0.4rem;
+    font-size: 0.85rem;
+}
+
+/* Formularios */
+
+.form-card {
+    background: #ffffff;
+    padding: 1.75rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+}
+
+form p {
+    margin-bottom: 0.9rem;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.45rem;
+    border: 1px solid #94a3b8;
+    font-size: 0.9rem;
+    background: #f8fafc;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.25);
+}
+
+/* Tablas */
+
+.table-wrapper {
+    background: #ffffff;
+    border-radius: 1rem;
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    padding: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+}
+
+th {
+    background: #123a86;
+    color: #f9fafb;
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+}
+
+td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+/* Títulos y contenedores */
+
+.page-title {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-actions {
+    margin: 0.5rem 0 1rem 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Login hero */
+
+.hero-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    gap: 2rem;
+    align-items: center;
+}
+
+.hero-card {
+    background: linear-gradient(135deg, #123a86, #1d4ed8);
+    border-radius: 1.2rem;
+    padding: 2.25rem;
+    color: #f9fafb;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+}
+
+.hero-subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin-bottom: 0.8rem;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.25;
+}
+
+.hero-title span {
+    display: block;
+}
+
+.hero-text {
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 1rem;
+    opacity: 0.98;
+}
+
+.message-error {
+    color: #b91c1c;
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+}
+
+@media (max-width: 900px) {
+    main {
+        padding: 1.5rem;
+    }
+
+    .hero-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+    }
+}
