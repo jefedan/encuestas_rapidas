@@ -1,0 +1,11 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Panel usuario{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>Panel del usuario</h2>
+    <p>Bienvenido, {{ request.session.username }}.</p>
+    <br>
+    <a href="{% url 'encuestas_asignadas' %}" class="btn btn-primary">Ver encuestas asignadas</a>
+</div>
+{% endblock %}
