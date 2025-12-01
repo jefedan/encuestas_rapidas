@@ -1,0 +1,37 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Preguntas{% endblock %}
+
+{% block content %}
+<div class="table-wrapper">
+    <h2 class="page-title">Listado de preguntas</h2>
+
+    <div class="page-actions">
+        <a href="{% url 'admin_panel' %}" class="btn btn-secondary">Volver al panel</a>
+        <a href="{% url 'pregunta_create' %}" class="btn btn-primary">Nueva pregunta</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Encuesta</th>
+                <th>Texto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in preguntas %}
+            <tr>
+                <td>{{ p.id_pregunta }}</td>
+                <td>{{ p.id_encuesta.nombre }}</td>
+                <td>{{ p.texto }}</td>
+                <td>
+                    <a href="{% url 'pregunta_update' p.id_pregunta %}">Editar</a> |
+                    <a href="{% url 'pregunta_delete' p.id_pregunta %}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
