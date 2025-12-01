@@ -1,51 +1,68 @@
 from django.db import models
 
 class Encuesta(models.Model):
-    titulo = models.CharField(max_length=200)
-    descripcion = models.TextField(blank=True)
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.titulo
-
-class Pregunta(models.Model):
-    TIPO_TEXTO = 'texto'
-    TIPO_UNA = 'una'
-    TIPO_MULTIPLE = 'varias'
-    TIPO_CHOICES = [
-        (TIPO_TEXTO, 'Respuesta abierta'),
-        (TIPO_UNA, 'Opción única'),
-        (TIPO_MULTIPLE, 'Opción múltiple'),
-    ]
-
-    encuesta = models.ForeignKey(Encuesta, related_name='preguntas', on_delete=models.CASCADE)
-    texto = models.CharField(max_length=500)
-    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES, default=TIPO_TEXTO)
-    opciones = models.TextField(blank=True, help_text="Cada opción en una línea para preguntas de opción.")
-    orden = models.PositiveIntegerField(default=0)
+    id_encuesta = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    descripcion = models.TextField(blank=True, null=True)
+    fecha_creacion = models.DateTimeField()
+    activa = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['orden', 'id']
-
-    def opciones_list(self):
-        return [o.strip() for o in self.opciones.splitlines() if o.strip()]
+        db_table = 'encuesta'
+        managed = False
 
     def __str__(self):
-        return f"{self.texto} ({self.get_tipo_display()})"
+        return self.nombre
+
+
+class Pregunta(models.Model):
+    id_pregunta = models.AutoField(primary_key=True)
+    id_encuesta = models.ForeignKey(Encuesta, on_delete=models.CASCADE, db_column='id_encuesta')
+    texto = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'pregunta'
+        managed = False
+
+    def __str__(self):
+        return self.texto
+
 
 class Participante(models.Model):
-    nombre = models.CharField(max_length=150, blank=True)
-    email = models.EmailField(blank=True)
-    fecha = models.DateTimeField(auto_now_add=True)
+    id_participante = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    correo = models.CharField(max_length=150)
+    username = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=50)
+    id_encuesta_asignada = models.ForeignKey(
+        Encuesta, on_delete=models.SET_NULL, null=True, db_column='id_encuesta_asignada', blank=True
+    )
+
+    class Meta:
+        db_table = 'participante'
+        managed = False
 
     def __str__(self):
-        return self.nombre or f"Participante {self.id}"
+        return self.username
+
 
 class Respuesta(models.Model):
-    participante = models.ForeignKey(Participante, related_name='respuestas', on_delete=models.CASCADE)
-    pregunta = models.ForeignKey(Pregunta, related_name='respuestas', on_delete=models.CASCADE)
-    respuesta_texto = models.TextField(blank=True)
-    fecha = models.DateTimeField(auto_now_add=True)
+    OPCIONES = [
+        ('Regular', 'Regular'),
+        ('Bueno', 'Bueno'),
+        ('Excelente', 'Excelente'),
+        ('No Responde', 'No Responde'),
+    ]
+
+    id_respuesta = models.AutoField(primary_key=True)
+    id_pregunta = models.ForeignKey(Pregunta, on_delete=models.CASCADE, db_column='id_pregunta')
+    id_participante = models.ForeignKey(Participante, on_delete=models.CASCADE, db_column='id_participante')
+    valor = models.CharField(max_length=20, choices=OPCIONES)
+    fecha_respuesta = models.DateTimeField()
+
+    class Meta:
+        db_table = 'respuesta'
+        managed = False
 
     def __str__(self):
-        return f"R:{self.pregunta.id} - P:{self.participante.id}"
+        return f"{self.id_participante} - {self.id_pregunta} - {self.valor}"
