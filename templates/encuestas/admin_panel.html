@@ -1,0 +1,13 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Panel administrador{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h2>Panel del administrador</h2>
+    <p>Seleccione una opción:</p>
+    <br>
+    <a href="{% url 'encuesta_list' %}" class="btn btn-primary">Gestionar encuestas</a>
+    <a href="{% url 'pregunta_list' %}" class="btn btn-primary">Gestionar preguntas</a>
+    <a href="{% url 'participante_list' %}" class="btn btn-primary">Gestionar participantes</a>
+</div>
+{% endblock %}
