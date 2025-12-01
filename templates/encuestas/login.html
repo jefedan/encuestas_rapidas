@@ -1,0 +1,36 @@
+{% extends 'appEncuestas/base.html' %}
+{% block title %}Ingreso{% endblock %}
+
+{% block content %}
+<div class="hero-layout">
+
+    <section class="hero-card">
+        <div class="hero-subtitle">Bienvenido</div>
+
+        <h2 class="hero-title">
+            <span>Sistema de Encuestas</span>
+            <span>Rápidas para Eventos</span>
+            <span>Grupo Diez</span>
+        </h2>
+
+        <p class="hero-text">
+            Bienvenido al Portal de Encuestas.
+            Acceda a nuestra plataforma especializada en recolección y análisis de datos.
+        </p>
+    </section>
+
+    <section class="form-card">
+        <h2>Ingreso al sistema</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+
+        {% for msg in messages %}
+            <p class="message-error">{{ msg }}</p>
+        {% endfor %}
+    </section>
+
+</div>
+{% endblock %}
